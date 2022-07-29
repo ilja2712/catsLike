@@ -1,9 +1,29 @@
-<nb-card class="mxw300 mxh400">
-    <nb-card-body>
-        Card
-    </nb-card-body>
-    <nb-card-footer>
-        <button nbButton status="success"><nb-icon icon="heart"></nb-icon>Like</button>
-        <button nbButton status="danger" class="right">Dislike<nb-icon icon="slash-outline"></nb-icon></button>
-    </nb-card-footer>
-</nb-card>
+<div *ngFor="let cat of cats" class="position-window">
+    <nb-card class="mxw300 mxh400 center" *ngIf="cat.id === currentCat">
+        <nb-card-body class="p1">
+            <img [src]="cat.image" class="image-cat">
+
+            <nb-card class="mnw300 mnh400 center position-window cardops" *ngIf="okayButton">
+                <nb-card-body class="position-window mnw300 mnh100 card-window">
+                    <span class="font">You got match!</span>
+                </nb-card-body>
+            </nb-card>
+
+            <nb-card class="mnw300 mnh400 center position-window cardops" *ngIf="endGame">
+                <nb-card-body class="position-window mnw300 mnh100 card-window">
+                    <span>
+                        <p class="font">The photos are over.</p>
+                        <p class="font">You can try again.</p>
+                    </span>
+                </nb-card-body>
+            </nb-card>
+
+        </nb-card-body>
+        <nb-card-footer>
+            <button nbButton status="success" [disabled]="!viewDislike" (click)="like()"><nb-icon icon="heart"></nb-icon>Like</button>
+            <button nbButton status="danger" class="right" (click)="dislike()" *ngIf="viewDislike">Dislike<nb-icon icon="slash-outline"></nb-icon></button>
+            <button nbButton status="info" class="right" (click)="continueLike()" *ngIf="okayButton">Okay<nb-icon icon="checkmark-outline"></nb-icon></button>
+            <button nbButton status="info" class="right" (click)="tryAgainCats()" *ngIf="endGame">Again<nb-icon icon="flip-2-outline"></nb-icon></button>
+        </nb-card-footer>
+    </nb-card>
+</div>

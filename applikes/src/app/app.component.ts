@@ -25,7 +25,7 @@ export class AppComponent {
     },
     {
       title: 'Cats',
-      icon: 'people-outline',
+      icon: 'github-outline',
       link: '/cats'
     }
   ];

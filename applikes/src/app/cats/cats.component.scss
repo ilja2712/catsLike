@@ -1,3 +1,15 @@
+
+/*
+* MAX SIZE
+*/
+.mxw150 {
+    max-width: 150px;
+} 
+
+.mxh150 {
+    max-height: 150px
+}
+
 .mxw300 {
     max-width: 300px;
 }
@@ -6,6 +18,62 @@
     max-height: 300px;
 }
 
+/*
+* MIN SIZE
+*/
+.mnw300 {
+    min-width: 300px;
+}
+
+.mnh100 {
+    min-height: 100px;
+}
+
+.mnh400 {
+    min-height: 400px;
+}
+
+
+/***/
+
 .right {
     float: right;
+}
+
+.center {
+    float: none;
+}
+
+.image-cat {
+    width: 297px;
+    height: 313px;
+}
+
+.p1 {
+    padding: 0px !important;
+    overflow: hidden !important;
+}
+
+.position-window {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.card-window {
+    background-color: rgba($color: #cee6fa, $alpha: 1.0);
+    text-align: center;
+    padding-top: 10%;
+}
+
+.font {
+    font-family: var(--button-text-font-family);
+    font-weight: var(--button-text-font-weight);
+    font-size: 18px;
+    color: rgba($color: #000000, $alpha: 1.0);
+}
+
+.cardops {
+    background-color: rgba($color: #cee6fa, $alpha: 0.5);
 }

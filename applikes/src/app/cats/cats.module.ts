@@ -3,7 +3,10 @@ import { CommonModule } from '@angular/common';
 
 import { CatsRoutingModule } from './cats-routing.module';
 import { CatsComponent } from './cats.component';
-import { NbButtonModule, NbCardModule, NbIconModule } from '@nebular/theme';
+import { NbButtonModule, NbCardModule, NbDialogModule, NbIconModule } from '@nebular/theme';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { ApiCatsService } from '../api/api-cats.service';
 
 
 @NgModule({
@@ -15,7 +18,11 @@ import { NbButtonModule, NbCardModule, NbIconModule } from '@nebular/theme';
     CatsRoutingModule,
     NbCardModule,
     NbButtonModule,
-    NbIconModule
+    NbIconModule,
+    HttpClientModule,
+    HttpClientInMemoryWebApiModule.forRoot(
+      ApiCatsService, { dataEncapsulation: false }
+    )
   ]
 })
 export class CatsModule { }
