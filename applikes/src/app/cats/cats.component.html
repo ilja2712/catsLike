@@ -1,7 +1,8 @@
-<div *ngFor="let cat of cats" class="position-window">
+<div *ngFor="let cat of (cats | async)" class="position-window">
     <nb-card class="mxw300 mxh400 center" *ngIf="cat.id === currentCat">
         <nb-card-body class="p1">
             <img [src]="cat.image" class="image-cat">
+            <input type="text" nbInput fullWidth fieldSize="small" value="{{cat.name}}, {{cat.age}} age" class="position-field fs200 font">
 
             <nb-card class="mnw300 mnh400 center position-window cardops" *ngIf="okayButton">
                 <nb-card-body class="position-window mnw300 mnh100 card-window">

@@ -2,7 +2,7 @@ import { getNumberOfCurrencyDigits } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { CatsService } from '../api/cats.service';
 import { Cats } from './cats';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-cats',
@@ -12,18 +12,19 @@ import { Observable } from 'rxjs';
 })
 export class CatsComponent implements OnInit {
 
-  cats: Cats[] = [];
   currentCat: number = 0;
   endGame: boolean = false;
   okayButton: boolean = false;
   viewDislike: boolean = true;
 
-  constructor(private catsService: CatsService) { 
+  cats: BehaviorSubject<Cats[]> = new BehaviorSubject<Cats[]>([]);
+
+  constructor(private catsService: CatsService) {
+    this.catsService.getCats().subscribe(this.cats);
   }
 
   ngOnInit(): void {
-    this.catsService.getCats()
-    .subscribe(cats => this.cats = cats);
+    
   }
 
   like(): void {
@@ -31,8 +32,9 @@ export class CatsComponent implements OnInit {
         this.okayButton = true;
         this.viewDislike = false;
       } else {
-        if (this.currentCat === (this.cats.length - 1)) {
-          this.tryAgainCats();
+        if (this.currentCat === (this.cats.getValue().length - 1)) {
+          this.endGame = true;
+          this.viewDislike = false;
         } else {
           this.currentCat++;
         }
@@ -40,7 +42,8 @@ export class CatsComponent implements OnInit {
   }
 
   dislike(): void {
-    if (this.currentCat === (this.cats.length - 1)) {
+    console.log(this.cats.getValue().length)
+    if (this.currentCat === (this.cats.getValue().length - 1)) {
       this.endGame = true;
       this.viewDislike = false;
     } else {
@@ -53,14 +56,15 @@ export class CatsComponent implements OnInit {
   }
 
   tryAgainCats(): void {
-    this.endGame == false;
+    this.endGame = false;
+    this.viewDislike = true;
     this.currentCat = 0;
   }
 
   continueLike(): void {
     this.okayButton = false;
     this.viewDislike = true;
-    if (this.currentCat === (this.cats.length - 1)) {
+    if (this.currentCat === (this.cats.getValue().length - 1)) {
       this.endGame = true;
       this.viewDislike = false;
     } else {

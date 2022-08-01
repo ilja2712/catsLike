@@ -61,6 +61,17 @@
     transform: translate(-50%, -50%);
 }
 
+.position-field {
+    position: absolute;
+    top: 93%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.fs200 {
+    max-width: 200px;
+}
+
 .card-window {
     background-color: rgba($color: #cee6fa, $alpha: 1.0);
     text-align: center;
