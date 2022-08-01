@@ -27,28 +27,27 @@ export class CatsComponent implements OnInit {
     
   }
 
-  like(): void {
-    if (this.randomMatch() === true) {
-        this.okayButton = true;
-        this.viewDislike = false;
-      } else {
-        if (this.currentCat === (this.cats.getValue().length - 1)) {
-          this.endGame = true;
-          this.viewDislike = false;
-        } else {
-          this.currentCat++;
-        }
-      }
-  }
-
-  dislike(): void {
-    console.log(this.cats.getValue().length)
+  checkEndList(): void {
     if (this.currentCat === (this.cats.getValue().length - 1)) {
       this.endGame = true;
       this.viewDislike = false;
     } else {
       this.currentCat++;
     }
+  }
+
+  like(): void {
+    if (this.randomMatch()) {
+        this.okayButton = true;
+        this.viewDislike = false;
+      } else {
+        this.checkEndList();
+      }
+  }
+
+  dislike(): void {
+    console.log(this.cats.getValue().length)
+    this.checkEndList();
   }
 
   randomMatch(): boolean {
@@ -64,12 +63,7 @@ export class CatsComponent implements OnInit {
   continueLike(): void {
     this.okayButton = false;
     this.viewDislike = true;
-    if (this.currentCat === (this.cats.getValue().length - 1)) {
-      this.endGame = true;
-      this.viewDislike = false;
-    } else {
-      this.currentCat++;
-    }
+    this.checkEndList();
   }
 
 
